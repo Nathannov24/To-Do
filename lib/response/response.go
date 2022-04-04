@@ -3,7 +3,7 @@ package responses
 func StatusDuplicated() map[string]interface{} {
 	var result = map[string]interface{}{
 		"status":  "failed",
-		"message": "Activity was inputed, try input another Activity",
+		"message": "Activity was inputed, try input another activity",
 	}
 	return result
 }
@@ -11,7 +11,7 @@ func StatusDuplicated() map[string]interface{} {
 func StatusFailedInput() map[string]interface{} {
 	var result = map[string]interface{}{
 		"status":  "failed",
-		"message": "Failed to Post",
+		"message": "Failed to post",
 	}
 	return result
 }
@@ -37,6 +37,30 @@ func StatusInternalServerError() map[string]interface{} {
 	var result = map[string]interface{}{
 		"status":  "failed",
 		"message": "internal server error",
+	}
+	return result
+}
+
+func StatusFailedID() map[string]interface{} {
+	var result = map[string]interface{}{
+		"status":  "failed",
+		"message": "Must enter ID after /",
+	}
+	return result
+}
+
+func StatusNotFound() map[string]interface{} {
+	var result = map[string]interface{}{
+		"status":  "failed",
+		"message": "Data not found",
+	}
+	return result
+}
+
+func StatusSuccessDelete() map[string]interface{} {
+	var result = map[string]interface{}{
+		"status":  "success",
+		"message": "Success delete activity",
 	}
 	return result
 }

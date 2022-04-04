@@ -35,3 +35,14 @@ func GetAllActivity() (interface{}, error) {
 	}
 	return activity, nil
 }
+
+func DeleteActivity(id int) (*models.Activity, error) {
+	tx := config.DB.Where("id=?", id).Delete(&models.Activity{})
+	if tx.Error != nil {
+		return nil, tx.Error
+	}
+	if tx.RowsAffected > 0 {
+		return &models.Activity{}, nil
+	}
+	return nil, nil
+}

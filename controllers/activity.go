@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"net/http"
+	"strconv"
 	"todo/lib/database"
 	responses "todo/lib/response"
 	"todo/models"
@@ -31,4 +32,19 @@ func GetActivityController(c echo.Context) error {
 		return c.JSON(http.StatusInternalServerError, responses.StatusInternalServerError())
 	}
 	return c.JSON(http.StatusOK, responses.StatusSuccessGetData(activity))
+}
+
+func DeleteActivityController(c echo.Context) error {
+	id, err := strconv.Atoi(c.Param("id"))
+	if err != nil {
+		return c.JSON(http.StatusBadGateway, responses.StatusFailedID())
+	}
+	respon, err := database.DeleteActivity(id)
+	if err != nil {
+		return c.JSON(http.StatusInternalServerError, responses.StatusInternalServerError())
+	}
+	if respon == nil {
+		return c.JSON(http.StatusNotFound, responses.StatusNotFound())
+	}
+	return c.JSON(http.StatusCreated, responses.StatusSuccessDelete())
 }
