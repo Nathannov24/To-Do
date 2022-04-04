@@ -24,6 +24,7 @@ func New() *echo.Echo {
 	e.POST("/post", controllers.PostActivityController)
 	e.GET("/", controllers.GetActivityController)
 	e.DELETE("/delete/:id", controllers.DeleteActivityController)
+	e.PUT("/update-status/:id", controllers.UpdateStatusController)
 
 	return e
 }

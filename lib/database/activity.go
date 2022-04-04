@@ -16,6 +16,17 @@ func GetActivityByName(name_activity string) (int64, error) {
 	return 0, nil
 }
 
+func GetActivityByID(id int) (int64, error) {
+	tx := config.DB.Where("id = ?", id).Find(&models.Activity{})
+	if tx.Error != nil {
+		return 0, tx.Error
+	}
+	if tx.RowsAffected > 0 {
+		return tx.RowsAffected, nil
+	}
+	return 0, nil
+}
+
 func PostActivity(activity models.Activity) (models.Activity, error) {
 	tx := config.DB.Save(&activity)
 	if tx.Error != nil {
@@ -45,4 +56,12 @@ func DeleteActivity(id int) (*models.Activity, error) {
 		return &models.Activity{}, nil
 	}
 	return nil, nil
+}
+
+func UpdateStatusActivity(id int) (int64, error) {
+	err := config.DB.Model(&models.Activity{}).Where("id=?", id).Update("status", "done")
+	if err.Error != nil {
+		return -1, err.Error
+	}
+	return err.RowsAffected, nil
 }

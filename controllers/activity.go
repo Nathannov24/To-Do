@@ -34,6 +34,19 @@ func GetActivityController(c echo.Context) error {
 	return c.JSON(http.StatusOK, responses.StatusSuccessGetData(activity))
 }
 
+func GetActivityByIDController(c echo.Context) error {
+	id, err := strconv.Atoi(c.Param("id"))
+	if err != nil {
+		return c.JSON(http.StatusBadRequest, responses.StatusFailedID())
+	}
+
+	activity, e := database.GetActivityByID(id)
+	if e != nil {
+		return c.JSON(http.StatusBadRequest, responses.StatusFailedGetByID())
+	}
+	return c.JSON(http.StatusOK, responses.StatusSuccessGetData(activity))
+}
+
 func DeleteActivityController(c echo.Context) error {
 	id, err := strconv.Atoi(c.Param("id"))
 	if err != nil {
@@ -47,4 +60,14 @@ func DeleteActivityController(c echo.Context) error {
 		return c.JSON(http.StatusNotFound, responses.StatusNotFound())
 	}
 	return c.JSON(http.StatusCreated, responses.StatusSuccessDelete())
+}
+
+func UpdateStatusController(c echo.Context) error {
+	id, e := strconv.Atoi(c.Param("id"))
+	if e != nil {
+		return c.JSON(http.StatusBadRequest, responses.StatusFailedID())
+	}
+
+	database.UpdateStatusActivity(id)
+	return c.JSON(http.StatusCreated, responses.StatusSuccessUpdateStatus())
 }

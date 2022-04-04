@@ -64,3 +64,19 @@ func StatusSuccessDelete() map[string]interface{} {
 	}
 	return result
 }
+
+func StatusFailedGetByID() map[string]interface{} {
+	var result = map[string]interface{}{
+		"status":  "failed",
+		"message": "Not found",
+	}
+	return result
+}
+
+func StatusSuccessUpdateStatus() map[string]interface{} {
+	var result = map[string]interface{}{
+		"status":  "success",
+		"message": "Success to update activity",
+	}
+	return result
+}
