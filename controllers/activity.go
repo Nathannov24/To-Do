@@ -24,3 +24,11 @@ func PostActivityController(c echo.Context) error {
 	}
 	return c.JSON(http.StatusCreated, responses.StatusSuccessInput(input.Name))
 }
+
+func GetActivityController(c echo.Context) error {
+	activity, err := database.GetAllActivity()
+	if err != nil {
+		return c.JSON(http.StatusInternalServerError, responses.StatusInternalServerError())
+	}
+	return c.JSON(http.StatusOK, responses.StatusSuccessGetData(activity))
+}

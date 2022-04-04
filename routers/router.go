@@ -22,6 +22,7 @@ func New() *echo.Echo {
 	}))
 
 	e.POST("/post", controllers.PostActivityController)
+	e.GET("/", controllers.GetActivityController)
 
 	return e
 }

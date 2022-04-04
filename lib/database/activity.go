@@ -23,3 +23,15 @@ func PostActivity(activity models.Activity) (models.Activity, error) {
 	}
 	return activity, nil
 }
+
+func GetAllActivity() (interface{}, error) {
+	var activity []models.ActivityResponse
+	query := config.DB.Table("activities").Where("activities.deleted_at IS NULL").Find(&activity)
+	if query.Error != nil {
+		return nil, query.Error
+	}
+	if query.RowsAffected == 0 {
+		return 0, nil
+	}
+	return activity, nil
+}

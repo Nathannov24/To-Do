@@ -14,3 +14,9 @@ type Activity struct {
 	UpdatedAt time.Time
 	DeletedAt gorm.DeletedAt `gorm:"index"`
 }
+
+type ActivityResponse struct {
+	ID     uint
+	Name   string
+	Status string
+}
