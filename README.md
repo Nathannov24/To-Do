@@ -32,11 +32,13 @@ git clone https://github.com/Nathannov24/To-Do.git
 ```
 * CREATE DATABASE IF NOT EXISTS `todo`;
 * CREATE .env in root and paste
+```
 DB_USERNAME=root
 DB_PASSWORD="Your Mysql Password"
 DB_HOST=localhost
 DB_PORT=3306
 DB_NAME=todo
+```
 * Run `main.go`
 ```
 $ go run main.go
